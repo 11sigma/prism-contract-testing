@@ -1,0 +1,23 @@
+swagger: "2.0"
+paths:
+  /json:
+    get:
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            required:
+              - title
+              - description
+            properties:
+              title:
+                type: string
+                example: Work
+              description:
+                type: string
+              priority:
+                type: number
+                default: 0
