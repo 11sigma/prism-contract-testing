@@ -32,9 +32,6 @@ paths:
                 x-tags:
                   - Pets
                 properties:
-                  name:
-                    type: string
-                    example: doggie
                   photoUrls:
                     type: array
                     items:
@@ -47,5 +44,4 @@ paths:
                       - pending
                       - sold
                 required:
-                  - name
                   - photoUrls
