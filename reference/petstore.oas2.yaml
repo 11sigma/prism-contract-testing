@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/models/error.v1.yaml
+                $ref: ./common/models/error.v1.yaml
     post:
       summary: Create a pet
       operationId: createPets
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/models/error.v1.yaml
+                $ref: ./common/models/error.v1.yaml
   '/pets/{petId}':
     get:
       summary: Info for a specific pet
@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../common/models/error.v1.yaml
+                $ref: ./common/models/error.v1.yaml
 components:
   schemas:
     Pets:
