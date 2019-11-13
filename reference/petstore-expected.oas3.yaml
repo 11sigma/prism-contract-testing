@@ -7,52 +7,6 @@ info:
 servers:
   - url: 'http://petstore.swagger.io/v1'
 paths:
-  /pets:
-    get:
-      summary: List all pets
-      operationId: listPets
-      tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: ./models/pet.v1.yaml
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ./common/models/error.v1.yaml
-    post:
-      summary: Create a pet
-      operationId: createPets
-      tags:
-        - pets
-      responses:
-        '201':
-          description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ./common/models/error.v1.yaml
   '/pets/{petId}':
     get:
       summary: Info for a specific pet
@@ -72,20 +26,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/pet.v1.yaml
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ./common/models/error.v1.yaml
-components:
-  schemas:
-    Pets:
-      type: array
-      items:
-        $ref: ./models/pet.v1.yaml
-      x-tags:
-        - Pets
-      title: Pets
-      description: A list of pets.
+                title: Pet
+                description: A single pet.
+                type: object
+                x-tags:
+                  - Pets
+                properties:
+                  name:
+                    type: string
+                    example: doggie
+                  photoUrls:
+                    type: array
+                    items:
+                      type: string
+                  status:
+                    type: string
+                    description: pet status in the store
+                    enum:
+                      - available
+                      - pending
+                      - sold
+                required:
+                  - name
+                  - photoUrls
