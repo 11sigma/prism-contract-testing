@@ -20,5 +20,3 @@ You can read more about this stuff [in an article I wrote](https://11sigma.com/b
 yarn # or `npm install`
 yarn test
 ```
-
-This test **should fail** with a body.title violation.
