@@ -22,15 +22,44 @@ describe('API Contract Test', () => {
   let operations: IHttpOperation[];
 
   beforeAll(async () => {
+    // extract HTTP operations from the OAS file and convert them to an array of spec-agnostic objects
     operations = await getHttpOperationsFromResource(resolve(__dirname, 'api.oas2.yaml'));
+    // create a Prism server programmatically
     server = createHttpServer(operations, config);
-    const address = await server.listen(4011, 'localhost');
+    await server.listen(4011, 'localhost');
   });
 
   test('test operations', () => {
+    // for each operation defined in the OAS file
     return Promise.all(operations.map(async operation => {
+      // dummy convertion from the IHttpOperation to an Axios request
       const request = operation2Request(operation);
+      // make a request to the Prism server
       const response = await axios(request);
+      /* THIS SHOULD FAIL with:
+      ```json
+        [
+          {
+            "location": [
+              "response",
+              "body"
+            ],
+            "severity": "Error",
+            "code": "required",
+            "message": "should have required property 'title'"
+          },
+          {
+            "location": [
+              "response",
+              "body"
+            ],
+            "severity": "Error",
+            "code": "required",
+            "message": "should have required property 'description'"
+          }
+        ]
+       ```
+      */
       expect(response.headers['sl-violations']).toBeUndefined();
     }))
   });
