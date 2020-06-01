@@ -26,7 +26,7 @@ jobs:
       run: yarn
 
     - name: Run httpbin
-      run: docker run -p 80:80 kennethreitz/httpbin
+      run: docker run -d -p 80:80 kennethreitz/httpbin
 
     - name: Run tests
       run: yarn test
